@@ -45,6 +45,10 @@ class _RadarStorage(Protocol):
         self, category: str, *, days: int = 7, limit: int = 200
     ) -> list[_Article]: ...
 
+    def recent_articles_by_collected_at(
+        self, category: str, *, days: int = 7, limit: int = 500
+    ) -> list[_Article]: ...
+
     def delete_older_than(self, days: int) -> int: ...
 
     def close(self) -> None: ...
@@ -239,6 +243,26 @@ def test_recent_articles_filters_by_period(tmp_storage: object) -> None:
 
     assert len(results) == 1
     assert results[0].link == recent_article.link
+
+
+def test_recent_articles_by_collected_at_keeps_recent_collections_with_old_publish_dates(
+    tmp_storage: object,
+) -> None:
+    storage = cast(_RadarStorage, tmp_storage)
+    old_but_newly_collected = _make_article(
+        title="Old published",
+        link="https://example.com/old-published",
+        summary="inside collection window",
+        published=datetime.now(UTC) - timedelta(days=30),
+    )
+
+    storage.upsert_articles([old_but_newly_collected])
+    published_results = storage.recent_articles(category="tech", days=7)
+    collected_results = storage.recent_articles_by_collected_at(category="tech", days=7)
+
+    assert published_results == []
+    assert len(collected_results) == 1
+    assert collected_results[0].link == old_but_newly_collected.link
 
 
 def test_recent_articles_filters_by_category(tmp_storage: object) -> None:
