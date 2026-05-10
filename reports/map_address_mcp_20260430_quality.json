@@ -1,6 +1,6 @@
 {
   "category": "map_address_mcp",
-  "generated_at": "2026-04-28T15:12:57.876489+00:00",
+  "generated_at": "2026-04-30T15:26:03.436672+00:00",
   "scope_note": "map_address_mcp treats the awesome-mcp-korea section as a T4 community directory seed. Repository metadata, API credential scope, and security context remain separate enrichment layers until archived, license, and advisory fields are collected.",
   "summary": {
     "total_sources": 3,
@@ -14,21 +14,56 @@
     "not_tracked_sources": 0,
     "skipped_disabled_sources": 2,
     "collection_error_count": 0,
-    "mcp_signal_event_count": 12,
-    "directory_seed_source_count": 3,
+    "mcp_signal_event_count": 14,
+    "directory_seed_source_count": 1,
     "mcp_server_candidate_count": 2,
     "enabled_mcp_server_source_count": 0,
     "blocked_mcp_server_source_count": 2,
     "real_transport_smoke_tested_source_count": 0,
-    "tool_allowlist_present_source_count": 0,
+    "tool_allowlist_present_source_count": 2,
     "credential_required_source_count": 2,
-    "repository_metadata_complete_source_count": 1,
-    "repository_metadata_gap_count": 1,
-    "security_activation_gate_count": 11,
-    "daily_review_item_count": 3,
+    "env_preflight_required_source_count": 2,
+    "env_preflight_ready_source_count": 0,
+    "env_preflight_missing_source_count": 2,
+    "env_preflight_missing_var_count": 6,
+    "env_preflight_not_required_source_count": 0,
+    "repository_metadata_complete_source_count": 2,
+    "repository_metadata_gap_count": 0,
+    "repository_metadata_fresh_source_count": 2,
+    "repository_metadata_stale_source_count": 0,
+    "repository_metadata_incomplete_source_count": 0,
+    "repository_metadata_missing_checked_at_source_count": 0,
+    "repository_metadata_review_required_count": 0,
+    "repository_docs_present_source_count": 2,
+    "repository_docs_missing_source_count": 0,
+    "repository_security_policy_present_source_count": 0,
+    "repository_security_advisory_checked_source_count": 2,
+    "repository_security_advisory_total_count": 0,
+    "repository_security_advisory_open_source_count": 0,
+    "repository_security_enrichment_review_required_count": 0,
+    "security_activation_gate_count": 9,
+    "activation_gate_source_count": 2,
+    "activation_gate_total_count": 9,
+    "activation_risk_scope_review_required_source_count": 2,
+    "activation_command_unresolved_source_count": 0,
+    "activation_command_discovery_checked_source_count": 1,
+    "activation_command_discovery_resolved_source_count": 1,
+    "activation_command_discovery_unresolved_source_count": 0,
+    "activation_command_discovery_multi_server_ambiguous_source_count": 0,
+    "activation_command_discovery_status_counts": {
+      "resolved_local_uv_script": 1
+    },
+    "activation_env_secret_required_source_count": 2,
+    "activation_tool_allowlist_required_source_count": 0,
+    "activation_registry_crosscheck_required_source_count": 2,
+    "activation_fake_transport_required_source_count": 2,
+    "activation_real_transport_required_source_count": 0,
+    "activation_runtime_review_required_source_count": 1,
+    "activation_ready_for_fake_transport_source_count": 0,
+    "daily_review_item_count": 4,
     "mcp_directory_entry_events": 6,
     "mcp_tool_result_events": 0,
-    "linked_repository_metadata_events": 0,
+    "linked_repository_metadata_events": 2,
     "risk_scope_signal_events": 6
   },
   "sources": [
@@ -46,19 +81,27 @@
       "repository": "",
       "activation_status": "",
       "activation_gates": [],
+      "activation_gate_count": 0,
+      "activation_next_gate": "",
+      "activation_command_discovery_status": "",
+      "activation_command_discovery_checked_at": "",
       "tools_count": 0,
       "env_count": 0,
+      "env_preflight_status": "not_required",
+      "env_required_names": [],
+      "env_missing_names": [],
       "repository_metadata_gaps": [
         "repository",
         "github_archived",
         "github_license",
         "github_pushed_at"
       ],
+      "repository_metadata": {},
       "freshness_sla_days": 7.0,
       "status": "fresh",
       "article_count": 6,
       "event_count": 6,
-      "latest_event_at": "2026-04-28T15:12:57.164556+00:00",
+      "latest_event_at": "2026-04-30T15:26:02.913804+00:00",
       "age_days": 0.0,
       "latest_title": "navermap-mcp-server",
       "latest_url": "https://github.com/flor3z-github/navermap-mcp-server",
@@ -95,19 +138,58 @@
       "producer_role": "",
       "info_purpose": [],
       "tracked": true,
-      "event_model": "mcp_directory_entry",
+      "event_model": "mcp_tool_result",
       "repository": "flor3z-github/navermap-mcp-server",
-      "activation_status": "blocked_tool_allowlist_unresolved",
+      "activation_status": "blocked_env_required",
       "activation_gates": [
         "risk_scope_review_required",
         "env_secret_documentation_required",
-        "tool_resource_allowlist_required",
         "registry_crosscheck_required",
         "fake_transport_smoke_test_required"
       ],
-      "tools_count": 0,
-      "env_count": 4,
+      "activation_gate_count": 4,
+      "activation_next_gate": "env_secret_documentation_required",
+      "activation_command_discovery_status": "",
+      "activation_command_discovery_checked_at": "",
+      "tools_count": 4,
+      "env_count": 2,
+      "env_preflight_status": "missing_required_env",
+      "env_required_names": [
+        "NAVER_CLIENT_ID",
+        "NAVER_CLIENT_SECRET"
+      ],
+      "env_missing_names": [
+        "NAVER_CLIENT_ID",
+        "NAVER_CLIENT_SECRET"
+      ],
       "repository_metadata_gaps": [],
+      "repository_metadata": {
+        "status": "fresh",
+        "repository": "flor3z-github/navermap-mcp-server",
+        "checked_at": "2026-04-30T03:18:56+00:00",
+        "age_days": 0.5,
+        "freshness_sla_days": 7.0,
+        "missing_fields": [],
+        "github_pushed_at": "2025-12-05T08:58:49Z",
+        "github_license": "Apache-2.0",
+        "github_archived": false,
+        "github_disabled": false,
+        "docs_advisory_checked_at": "2026-04-30T05:06:52+00:00",
+        "github_readme_present": true,
+        "github_readme_path": "README.md",
+        "github_docs_present": true,
+        "github_docs_paths": [
+          "README.md"
+        ],
+        "github_security_policy_present": false,
+        "github_security_policy_paths": [],
+        "github_security_advisory_access_status": "checked",
+        "github_security_advisory_count": 0,
+        "github_security_advisory_open_count": 0,
+        "github_security_advisory_published_count": 0,
+        "github_security_advisory_state_counts": {},
+        "github_security_advisory_ids": []
+      },
       "freshness_sla_days": 7.0,
       "status": "skipped_disabled",
       "article_count": 0,
@@ -133,22 +215,63 @@
       "producer_role": "",
       "info_purpose": [],
       "tracked": true,
-      "event_model": "mcp_directory_entry",
+      "event_model": "mcp_tool_result",
       "repository": "yeonupark/mcp-naver-map",
-      "activation_status": "blocked_command_unresolved",
+      "activation_status": "blocked_runtime_config_unresolved",
       "activation_gates": [
         "risk_scope_review_required",
         "env_secret_documentation_required",
-        "tool_resource_allowlist_required",
-        "command_or_endpoint_unresolved",
+        "upstream_runtime_config_patch_required",
         "registry_crosscheck_required",
         "fake_transport_smoke_test_required"
       ],
-      "tools_count": 0,
+      "activation_gate_count": 5,
+      "activation_next_gate": "env_secret_documentation_required",
+      "activation_command_discovery_status": "resolved_local_uv_script",
+      "activation_command_discovery_checked_at": "2026-04-30T07:29:15+00:00",
+      "tools_count": 2,
       "env_count": 4,
-      "repository_metadata_gaps": [
-        "github_license"
+      "env_preflight_status": "missing_required_env",
+      "env_required_names": [
+        "MAP_CLIENT_ID",
+        "MAP_CLIENT_SECRET",
+        "NAVER_ACCESS_KEY_ID",
+        "NAVER_SECRET_KEY"
       ],
+      "env_missing_names": [
+        "MAP_CLIENT_ID",
+        "MAP_CLIENT_SECRET",
+        "NAVER_ACCESS_KEY_ID",
+        "NAVER_SECRET_KEY"
+      ],
+      "repository_metadata_gaps": [],
+      "repository_metadata": {
+        "status": "fresh",
+        "repository": "yeonupark/mcp-naver-map",
+        "checked_at": "2026-04-30T03:18:56+00:00",
+        "age_days": 0.5,
+        "freshness_sla_days": 7.0,
+        "missing_fields": [],
+        "github_pushed_at": "2025-04-09T02:16:00Z",
+        "github_license": "NOASSERTION",
+        "github_archived": false,
+        "github_disabled": false,
+        "docs_advisory_checked_at": "2026-04-30T05:06:52+00:00",
+        "github_readme_present": true,
+        "github_readme_path": "README.md",
+        "github_docs_present": true,
+        "github_docs_paths": [
+          "README.md"
+        ],
+        "github_security_policy_present": false,
+        "github_security_policy_paths": [],
+        "github_security_advisory_access_status": "checked",
+        "github_security_advisory_count": 0,
+        "github_security_advisory_open_count": 0,
+        "github_security_advisory_published_count": 0,
+        "github_security_advisory_state_counts": {},
+        "github_security_advisory_ids": []
+      },
       "freshness_sla_days": 7.0,
       "status": "skipped_disabled",
       "article_count": 0,
@@ -171,7 +294,7 @@
       "event_model": "mcp_directory_entry",
       "title": "navermap-mcp-server",
       "url": "https://github.com/flor3z-github/navermap-mcp-server",
-      "event_at": "2026-04-28T15:12:57.164556+00:00",
+      "event_at": "2026-04-30T15:26:02.913804+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -205,7 +328,7 @@
       "event_model": "risk_scope_signal",
       "title": "navermap-mcp-server",
       "url": "https://github.com/flor3z-github/navermap-mcp-server",
-      "event_at": "2026-04-28T15:12:57.164556+00:00",
+      "event_at": "2026-04-30T15:26:02.913804+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -239,7 +362,7 @@
       "event_model": "mcp_directory_entry",
       "title": "mcp-server-kakao-map",
       "url": "https://github.com/cgoinglove/mcp-server-kakao-map",
-      "event_at": "2026-04-24T07:38:09.820880+00:00",
+      "event_at": "2026-04-30T08:37:07.402407+00:00",
       "mcp_domain": [],
       "provider": [
         "kakao",
@@ -268,7 +391,7 @@
       "event_model": "risk_scope_signal",
       "title": "mcp-server-kakao-map",
       "url": "https://github.com/cgoinglove/mcp-server-kakao-map",
-      "event_at": "2026-04-24T07:38:09.820880+00:00",
+      "event_at": "2026-04-30T08:37:07.402407+00:00",
       "mcp_domain": [],
       "provider": [
         "kakao",
@@ -297,7 +420,7 @@
       "event_model": "mcp_directory_entry",
       "title": "jeong-sik/kakao-api-mcp-server",
       "url": "https://github.com/jeong-sik/kakao-api-mcp-server",
-      "event_at": "2026-04-24T07:38:09.820856+00:00",
+      "event_at": "2026-04-30T08:37:07.402406+00:00",
       "mcp_domain": [
         "주소"
       ],
@@ -329,7 +452,7 @@
       "event_model": "risk_scope_signal",
       "title": "jeong-sik/kakao-api-mcp-server",
       "url": "https://github.com/jeong-sik/kakao-api-mcp-server",
-      "event_at": "2026-04-24T07:38:09.820856+00:00",
+      "event_at": "2026-04-30T08:37:07.402406+00:00",
       "mcp_domain": [
         "주소"
       ],
@@ -361,7 +484,7 @@
       "event_model": "mcp_directory_entry",
       "title": "kakao-navigation-mcp-server",
       "url": "https://github.com/CaChiJ/kakao-navigation-mcp-server",
-      "event_at": "2026-04-24T07:38:09.820853+00:00",
+      "event_at": "2026-04-30T08:37:07.402405+00:00",
       "mcp_domain": [
         "위치",
         "지오코딩"
@@ -393,7 +516,7 @@
       "event_model": "risk_scope_signal",
       "title": "kakao-navigation-mcp-server",
       "url": "https://github.com/CaChiJ/kakao-navigation-mcp-server",
-      "event_at": "2026-04-24T07:38:09.820853+00:00",
+      "event_at": "2026-04-30T08:37:07.402405+00:00",
       "mcp_domain": [
         "위치",
         "지오코딩"
@@ -425,7 +548,7 @@
       "event_model": "mcp_directory_entry",
       "title": "mcp-naver-maps",
       "url": "https://github.com/yunkee-lee/mcp-naver-maps",
-      "event_at": "2026-04-24T07:38:09.820851+00:00",
+      "event_at": "2026-04-30T08:37:07.402404+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -457,7 +580,7 @@
       "event_model": "risk_scope_signal",
       "title": "mcp-naver-maps",
       "url": "https://github.com/yunkee-lee/mcp-naver-maps",
-      "event_at": "2026-04-24T07:38:09.820851+00:00",
+      "event_at": "2026-04-30T08:37:07.402404+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -489,7 +612,7 @@
       "event_model": "mcp_directory_entry",
       "title": "mcp-naver-map",
       "url": "https://github.com/yeonupark/mcp-naver-map",
-      "event_at": "2026-04-24T07:38:09.820847+00:00",
+      "event_at": "2026-04-30T08:37:07.402402+00:00",
       "mcp_domain": [
         "geolocation",
         "위치",
@@ -519,7 +642,7 @@
       "event_model": "risk_scope_signal",
       "title": "mcp-naver-map",
       "url": "https://github.com/yeonupark/mcp-naver-map",
-      "event_at": "2026-04-24T07:38:09.820847+00:00",
+      "event_at": "2026-04-30T08:37:07.402402+00:00",
       "mcp_domain": [
         "geolocation",
         "위치",
@@ -543,42 +666,122 @@
         "risk_scope": true,
         "evidence_url": true
       }
+    },
+    {
+      "source": "flor3z-github/navermap-mcp-server",
+      "event_model": "linked_repository_metadata",
+      "title": "flor3z-github/navermap-mcp-server repository metadata",
+      "url": "https://github.com/flor3z-github/navermap-mcp-server",
+      "event_at": "2025-12-05T08:58:49+00:00",
+      "mcp_domain": [],
+      "provider": [],
+      "capability": [],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "archived": true,
+        "license": true,
+        "docs": true,
+        "security_advisory_check": true
+      },
+      "repository": "flor3z-github/navermap-mcp-server",
+      "repository_metadata_status": "fresh",
+      "repository_metadata_checked_at": "2026-04-30T03:18:56+00:00",
+      "github_pushed_at": "2025-12-05T08:58:49Z",
+      "github_license": "Apache-2.0",
+      "github_archived": false,
+      "github_readme_present": true,
+      "github_docs_present": true,
+      "github_docs_paths": [
+        "README.md"
+      ],
+      "github_security_policy_present": false,
+      "github_security_advisory_access_status": "checked",
+      "github_security_advisory_count": 0,
+      "github_security_advisory_open_count": 0
+    },
+    {
+      "source": "yeonupark/mcp-naver-map",
+      "event_model": "linked_repository_metadata",
+      "title": "yeonupark/mcp-naver-map repository metadata",
+      "url": "https://github.com/yeonupark/mcp-naver-map",
+      "event_at": "2025-04-09T02:16:00+00:00",
+      "mcp_domain": [],
+      "provider": [],
+      "capability": [],
+      "risk_scope": [],
+      "project_health": [],
+      "required_field_proxy": {
+        "repository": true,
+        "archived": true,
+        "license": true,
+        "docs": true,
+        "security_advisory_check": true
+      },
+      "repository": "yeonupark/mcp-naver-map",
+      "repository_metadata_status": "fresh",
+      "repository_metadata_checked_at": "2026-04-30T03:18:56+00:00",
+      "github_pushed_at": "2025-04-09T02:16:00Z",
+      "github_license": "NOASSERTION",
+      "github_archived": false,
+      "github_readme_present": true,
+      "github_docs_present": true,
+      "github_docs_paths": [
+        "README.md"
+      ],
+      "github_security_policy_present": false,
+      "github_security_advisory_access_status": "checked",
+      "github_security_advisory_count": 0,
+      "github_security_advisory_open_count": 0
     }
   ],
   "daily_review_items": [
     {
+      "reason": "mcp_env_preflight_missing",
+      "source": "flor3z-github/navermap-mcp-server",
+      "repository": "flor3z-github/navermap-mcp-server",
+      "missing_env": [
+        "NAVER_CLIENT_ID",
+        "NAVER_CLIENT_SECRET"
+      ],
+      "activation_status": "blocked_env_required"
+    },
+    {
       "reason": "mcp_candidate_disabled",
       "source": "flor3z-github/navermap-mcp-server",
       "repository": "flor3z-github/navermap-mcp-server",
-      "activation_status": "blocked_tool_allowlist_unresolved",
+      "activation_status": "blocked_env_required",
       "activation_gates": [
         "risk_scope_review_required",
         "env_secret_documentation_required",
-        "tool_resource_allowlist_required",
         "registry_crosscheck_required",
         "fake_transport_smoke_test_required"
       ]
+    },
+    {
+      "reason": "mcp_env_preflight_missing",
+      "source": "yeonupark/mcp-naver-map",
+      "repository": "yeonupark/mcp-naver-map",
+      "missing_env": [
+        "MAP_CLIENT_ID",
+        "MAP_CLIENT_SECRET",
+        "NAVER_ACCESS_KEY_ID",
+        "NAVER_SECRET_KEY"
+      ],
+      "activation_status": "blocked_runtime_config_unresolved"
     },
     {
       "reason": "mcp_candidate_disabled",
       "source": "yeonupark/mcp-naver-map",
       "repository": "yeonupark/mcp-naver-map",
-      "activation_status": "blocked_command_unresolved",
+      "activation_status": "blocked_runtime_config_unresolved",
       "activation_gates": [
         "risk_scope_review_required",
         "env_secret_documentation_required",
-        "tool_resource_allowlist_required",
-        "command_or_endpoint_unresolved",
+        "upstream_runtime_config_patch_required",
         "registry_crosscheck_required",
         "fake_transport_smoke_test_required"
-      ]
-    },
-    {
-      "reason": "repository_metadata_gap",
-      "source": "yeonupark/mcp-naver-map",
-      "repository": "yeonupark/mcp-naver-map",
-      "missing_fields": [
-        "github_license"
       ]
     }
   ],

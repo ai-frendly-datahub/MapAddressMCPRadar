@@ -1,7 +1,16 @@
 from __future__ import annotations
 
+import sys
+
+import pytest
+
 from radar.collector import _collect_single, collect_sources
+from radar.exceptions import NetworkError, SourceError
+from radar.mcp_source import collect_mcp_server_source
 from radar.models import Source
+
+
+HANGING_MCP_SERVER = "import time; time.sleep(30)"
 
 
 def test_mcp_server_source_invokes_allowlisted_tool(monkeypatch) -> None:
@@ -80,6 +89,26 @@ def test_disabled_mcp_server_source_is_not_executed(monkeypatch) -> None:
     assert errors == []
 
 
+def test_required_env_missing_fails_before_process_launch(monkeypatch) -> None:
+    monkeypatch.delenv("MCP_RADAR_TEST_API_KEY", raising=False)
+    source = Source(
+        name="Env-gated MCP",
+        type="mcp_server",
+        url="mcp://env-gated",
+        config={
+            "transport": "stdio",
+            "command": sys.executable,
+            "args": ["-c", "raise SystemExit(99)"],
+            "tools": ["search"],
+            "env": ["MCP_RADAR_TEST_API_KEY"],
+            "timeout_seconds": 1,
+        },
+    )
+
+    with pytest.raises(SourceError, match="Missing required MCP env var"):
+        collect_mcp_server_source(source, category="mcp", limit=5, timeout=1)
+
+
 def test_mcp_payload_without_url_uses_safe_fallback(monkeypatch) -> None:
     source = Source(
         name="Fallback MCP",
@@ -99,3 +128,56 @@ def test_mcp_payload_without_url_uses_safe_fallback(monkeypatch) -> None:
     assert len(articles) == 1
     assert articles[0].title == "plain text result"
     assert articles[0].link == "mcp://fallback-mcp"
+
+
+def test_stdio_runtime_timeout_reports_request_context() -> None:
+    source = Source(
+        name="Hanging MCP",
+        type="mcp_server",
+        url="mcp://hanging",
+        config={
+            "transport": "stdio",
+            "command": sys.executable,
+            "args": ["-c", HANGING_MCP_SERVER],
+            "tools": ["search"],
+            "timeout_seconds": 1,
+        },
+    )
+
+    with pytest.raises(NetworkError, match="response 1 after 1s"):
+        collect_mcp_server_source(source, category="mcp", limit=5, timeout=1)
+
+
+def test_flor3z_navermap_fake_stdio_fixture_collects_tool_results(monkeypatch) -> None:
+    monkeypatch.setenv("NAVER_CLIENT_ID", "fixture-only")
+    monkeypatch.setenv("NAVER_CLIENT_SECRET", "fixture-only")
+    source = Source(
+        name="flor3z-github/navermap-mcp-server",
+        type="mcp_server",
+        url="https://github.com/flor3z-github/navermap-mcp-server",
+        config={
+            "transport": "stdio",
+            "command": sys.executable,
+            "args": ["fixtures/mcp/fake_flor3z_navermap_mcp.py"],
+            "tools": [
+                "navermap_geocode",
+                "navermap_reverse_geocode",
+                "navermap_get_directions",
+                "navermap_get_static_map",
+            ],
+            "env": ["NAVER_CLIENT_ID", "NAVER_CLIENT_SECRET"],
+            "timeout_seconds": 5,
+            "max_items": 10,
+        },
+    )
+
+    articles = collect_mcp_server_source(
+        source, category="map_address_mcp", limit=10, timeout=5
+    )
+
+    assert len(articles) == 4
+    titles = {article.title for article in articles}
+    assert "Naver Map geocode fixture" in titles
+    for article in articles:
+        assert article.category == "map_address_mcp"
+        assert article.link.startswith("https://example.test/mapaddress/navermap/")

@@ -20,6 +20,14 @@ def _seed_source(category):
     return seeds[0]
 
 
+def _mcp_source(category, repository: str):
+    return next(
+        source
+        for source in category.sources
+        if source.type == "mcp_server" and source.config.get("repository") == repository
+    )
+
+
 def test_mcp_category_config_uses_readme_section_source() -> None:
     category = load_category_config(_category_name())
 
@@ -81,8 +89,10 @@ def test_mcp_server_sources_are_disabled_metadata_candidates() -> None:
         "blocked_command_unresolved",
         "blocked_env_required",
         "blocked_tool_allowlist_unresolved",
+        "blocked_runtime_config_unresolved",
         "candidate_ready_for_fake_transport_test",
         "fake_transport_smoke_test_passed",
+        "permanently_disabled_redundant",
     }
     for source in candidates:
         assert source.enabled is False
@@ -92,9 +102,31 @@ def test_mcp_server_sources_are_disabled_metadata_candidates() -> None:
         assert source.config["repository"]
         assert isinstance(source.config.get("tools", []), list)
         assert isinstance(source.config.get("resources", []), list)
+        assert source.config["docs_advisory_audit_status"] == "passed"
+        assert (
+            source.config["docs_advisory_audit_artifact"]
+            == "_workspace/2026-04-30_cycle69_mcp_docs_advisory_audit.json"
+        )
+        assert source.config["github_readme_present"] is True
+        assert source.config["github_docs_present"] is True
+        assert source.config["github_docs_paths"]
+        assert source.config["github_security_advisory_access_status"].startswith("checked")
+        assert source.config["github_security_advisory_count"] >= 0
+        if source.config.get("command_discovery_status"):
+            assert source.config["command_discovery_checked_at"]
+            assert (
+                source.config["command_discovery_artifact"]
+                == "_workspace/2026-04-30_cycle71_mcp_command_discovery_audit.json"
+            )
+        if "command_or_endpoint_unresolved" in source.config.get("activation_gates", []):
+            assert source.config["command_discovery_status"]
         if source.config["activation_status"] != "metadata_only":
             assert source.config["activation_audited_at"]
-            assert source.config["activation_gates"]
+            if source.config["activation_status"].startswith("permanently_disabled_"):
+                assert source.config["disabled_reason"]
+                assert source.config["activation_gates"] == []
+            else:
+                assert source.config["activation_gates"]
 
 
 def test_mcp_quality_config_tracks_directory_metadata_and_risk_events() -> None:
@@ -106,6 +138,7 @@ def test_mcp_quality_config_tracks_directory_metadata_and_risk_events() -> None:
     assert isinstance(outputs, dict)
     assert outputs["tracked_event_models"] == [
         "mcp_directory_entry",
+        "mcp_tool_result",
         "linked_repository_metadata",
         "risk_scope_signal",
     ]
@@ -113,3 +146,106 @@ def test_mcp_quality_config_tracks_directory_metadata_and_risk_events() -> None:
     source_backlog = quality_config["source_backlog"]
     assert isinstance(source_backlog, dict)
     assert "operational_candidates" in source_backlog
+
+
+def test_navermap_candidate_has_core_read_only_tool_allowlist() -> None:
+    category = load_category_config(_category_name())
+    source = _mcp_source(category, "flor3z-github/navermap-mcp-server")
+
+    assert source.enabled is False
+    assert source.config["activation_status"] == "blocked_env_required"
+    assert source.config["env"] == ["NAVER_CLIENT_ID", "NAVER_CLIENT_SECRET"]
+    assert source.config["event_model"] == "mcp_tool_result"
+    assert "tool_resource_allowlist_required" not in source.config["activation_gates"]
+    assert "tool_allowlist_unresolved" not in source.config["risk_scope"]
+    assert "financial_action_possible" not in source.config["risk_scope"]
+    assert "write_or_mutation_possible" not in source.config["risk_scope"]
+    assert [tool["name"] for tool in source.config["tools"]] == [
+        "navermap_geocode",
+        "navermap_reverse_geocode",
+        "navermap_get_directions",
+        "navermap_get_static_map",
+    ]
+
+
+def test_navermap_candidate_has_fake_transport_evidence() -> None:
+    category = load_category_config(_category_name())
+    source = _mcp_source(category, "flor3z-github/navermap-mcp-server")
+
+    assert source.config["fake_transport_smoke_test_status"] == "passed"
+    assert (
+        source.config["fake_transport_smoke_test_artifact"]
+        == "_workspace/2026-05-01_cycle82_mapaddress_flor3z_navermap_fake_probe.json"
+    )
+    assert (
+        source.config["fake_transport_fixture"]
+        == "fixtures/mcp/fake_flor3z_navermap_mcp.py"
+    )
+    assert "fake_transport_smoke_test_required" not in source.config["activation_gates"]
+    assert "real_transport_smoke_test_required" in source.config["activation_gates"]
+
+
+def test_yeonupark_naver_map_candidate_has_command_but_runtime_config_block() -> None:
+    category = load_category_config(_category_name())
+    source = _mcp_source(category, "yeonupark/mcp-naver-map")
+
+    assert source.enabled is False
+    assert source.config["activation_status"] == "permanently_disabled_redundant"
+    assert source.config["command_discovery_status"] == "resolved_local_uv_script"
+    assert source.config["command"] == "uv"
+    assert source.config["args"] == [
+        "--directory",
+        "<local_checkout>/mcp-naver-map",
+        "run",
+        "server",
+    ]
+    assert source.config["runtime_config_issue"] == "upstream_readme_command_missing_project_script"
+    assert source.config["runtime_resolution_status"] == "permanently_disabled_redundant"
+    assert (
+        source.config["runtime_resolution_artifact"]
+        == "_workspace/2026-05-07_mcp_runtime_blocker_resolution.json"
+    )
+    assert (
+        source.config["runtime_resolution_replacement_source_id"]
+        == "mcp_candidate_flor3z_github_navermap_mcp_server"
+    )
+    assert (
+        source.config["runtime_resolution_replacement_repository"]
+        == "flor3z-github/navermap-mcp-server"
+    )
+    assert source.config["disabled_reason"] == "redundant_with_flor3z_navermap_mcp_server"
+    assert source.config["retired_env_requirements"] == [
+        "MAP_CLIENT_ID",
+        "MAP_CLIENT_SECRET",
+        "NAVER_ACCESS_KEY_ID",
+        "NAVER_SECRET_KEY",
+    ]
+    assert source.config["env"] == []
+    assert source.config["event_model"] == "mcp_tool_result"
+    assert "upstream_runtime_config_patch_required" not in source.config["activation_gates"]
+    assert source.config["activation_gates"] == []
+    assert "command_or_endpoint_unresolved" not in source.config["activation_gates"]
+    assert "tool_resource_allowlist_required" not in source.config["activation_gates"]
+    assert "tool_allowlist_unresolved" not in source.config["risk_scope"]
+    assert "write_or_mutation_possible" not in source.config["risk_scope"]
+    assert "location_data" in source.config["risk_scope"]
+    assert source.config["tools"] == ["get_current_location", "get_directions"]
+
+
+def test_yeonupark_naver_map_candidate_has_fake_transport_evidence() -> None:
+    category = load_category_config(_category_name())
+    source = _mcp_source(category, "yeonupark/mcp-naver-map")
+
+    assert source.config["activation_status"] == "permanently_disabled_redundant"
+    assert source.config["fake_transport_smoke_test_status"] == "passed"
+    assert (
+        source.config["fake_transport_smoke_test_artifact"]
+        == "_workspace/2026-05-07_mapaddress_yeonupark_naver_map_fake_probe.json"
+    )
+    assert (
+        source.config["fake_transport_fixture"]
+        == "fixtures/mcp/fake_yeonupark_naver_map_mcp.py"
+    )
+    assert "fake_transport_smoke_test_required" not in source.config["activation_gates"]
+    assert "upstream_runtime_config_patch_required" not in source.config["activation_gates"]
+    assert source.config["activation_gates"] == []
