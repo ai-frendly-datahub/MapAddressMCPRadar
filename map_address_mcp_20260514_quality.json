@@ -1,6 +1,6 @@
 {
   "category": "map_address_mcp",
-  "generated_at": "2026-05-14T07:46:16.657336+00:00",
+  "generated_at": "2026-05-14T16:09:44.050524+00:00",
   "scope_note": "map_address_mcp treats the awesome-mcp-korea section as a T4 community directory seed. Repository metadata, API credential scope, and security context remain separate enrichment layers until archived, license, and advisory fields are collected.",
   "summary": {
     "total_sources": 3,
@@ -101,7 +101,7 @@
       "status": "fresh",
       "article_count": 6,
       "event_count": 6,
-      "latest_event_at": "2026-05-14T07:46:16.034652+00:00",
+      "latest_event_at": "2026-05-14T16:09:43.446763+00:00",
       "age_days": 0.0,
       "latest_title": "mcp-server-kakao-map",
       "latest_url": "https://github.com/cgoinglove/mcp-server-kakao-map",
@@ -159,7 +159,7 @@
         "status": "stale",
         "repository": "flor3z-github/navermap-mcp-server",
         "checked_at": "2026-05-07T05:20:56+00:00",
-        "age_days": 7.1,
+        "age_days": 7.45,
         "freshness_sla_days": 7.0,
         "missing_fields": [],
         "github_pushed_at": "2025-12-05T08:58:49Z",
@@ -225,7 +225,7 @@
         "status": "stale",
         "repository": "yeonupark/mcp-naver-map",
         "checked_at": "2026-05-07T05:20:56+00:00",
-        "age_days": 7.1,
+        "age_days": 7.45,
         "freshness_sla_days": 7.0,
         "missing_fields": [],
         "github_pushed_at": "2025-04-09T02:16:00Z",
@@ -270,7 +270,7 @@
       "event_model": "mcp_directory_entry",
       "title": "mcp-server-kakao-map",
       "url": "https://github.com/cgoinglove/mcp-server-kakao-map",
-      "event_at": "2026-05-14T07:46:16.034652+00:00",
+      "event_at": "2026-05-14T16:09:43.446763+00:00",
       "mcp_domain": [],
       "provider": [
         "kakao",
@@ -299,7 +299,7 @@
       "event_model": "risk_scope_signal",
       "title": "mcp-server-kakao-map",
       "url": "https://github.com/cgoinglove/mcp-server-kakao-map",
-      "event_at": "2026-05-14T07:46:16.034652+00:00",
+      "event_at": "2026-05-14T16:09:43.446763+00:00",
       "mcp_domain": [],
       "provider": [
         "kakao",
@@ -328,7 +328,7 @@
       "event_model": "mcp_directory_entry",
       "title": "jeong-sik/kakao-api-mcp-server",
       "url": "https://github.com/jeong-sik/kakao-api-mcp-server",
-      "event_at": "2026-05-14T07:46:16.034651+00:00",
+      "event_at": "2026-05-14T16:09:43.446761+00:00",
       "mcp_domain": [
         "주소"
       ],
@@ -360,7 +360,7 @@
       "event_model": "risk_scope_signal",
       "title": "jeong-sik/kakao-api-mcp-server",
       "url": "https://github.com/jeong-sik/kakao-api-mcp-server",
-      "event_at": "2026-05-14T07:46:16.034651+00:00",
+      "event_at": "2026-05-14T16:09:43.446761+00:00",
       "mcp_domain": [
         "주소"
       ],
@@ -392,7 +392,7 @@
       "event_model": "mcp_directory_entry",
       "title": "kakao-navigation-mcp-server",
       "url": "https://github.com/CaChiJ/kakao-navigation-mcp-server",
-      "event_at": "2026-05-14T07:46:16.034650+00:00",
+      "event_at": "2026-05-14T16:09:43.446760+00:00",
       "mcp_domain": [
         "위치",
         "지오코딩"
@@ -424,7 +424,7 @@
       "event_model": "risk_scope_signal",
       "title": "kakao-navigation-mcp-server",
       "url": "https://github.com/CaChiJ/kakao-navigation-mcp-server",
-      "event_at": "2026-05-14T07:46:16.034650+00:00",
+      "event_at": "2026-05-14T16:09:43.446760+00:00",
       "mcp_domain": [
         "위치",
         "지오코딩"
@@ -456,7 +456,7 @@
       "event_model": "mcp_directory_entry",
       "title": "mcp-naver-maps",
       "url": "https://github.com/yunkee-lee/mcp-naver-maps",
-      "event_at": "2026-05-14T07:46:16.034648+00:00",
+      "event_at": "2026-05-14T16:09:43.446759+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -488,7 +488,7 @@
       "event_model": "risk_scope_signal",
       "title": "mcp-naver-maps",
       "url": "https://github.com/yunkee-lee/mcp-naver-maps",
-      "event_at": "2026-05-14T07:46:16.034648+00:00",
+      "event_at": "2026-05-14T16:09:43.446759+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -520,7 +520,7 @@
       "event_model": "mcp_directory_entry",
       "title": "mcp-naver-map",
       "url": "https://github.com/yeonupark/mcp-naver-map",
-      "event_at": "2026-05-14T07:46:16.034646+00:00",
+      "event_at": "2026-05-14T16:09:43.446756+00:00",
       "mcp_domain": [
         "geolocation",
         "위치",
@@ -550,7 +550,7 @@
       "event_model": "risk_scope_signal",
       "title": "mcp-naver-map",
       "url": "https://github.com/yeonupark/mcp-naver-map",
-      "event_at": "2026-05-14T07:46:16.034646+00:00",
+      "event_at": "2026-05-14T16:09:43.446756+00:00",
       "mcp_domain": [
         "geolocation",
         "위치",
@@ -580,7 +580,7 @@
       "event_model": "mcp_directory_entry",
       "title": "navermap-mcp-server",
       "url": "https://github.com/flor3z-github/navermap-mcp-server",
-      "event_at": "2026-05-14T07:46:16.034634+00:00",
+      "event_at": "2026-05-14T16:09:43.446741+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -614,7 +614,7 @@
       "event_model": "risk_scope_signal",
       "title": "navermap-mcp-server",
       "url": "https://github.com/flor3z-github/navermap-mcp-server",
-      "event_at": "2026-05-14T07:46:16.034634+00:00",
+      "event_at": "2026-05-14T16:09:43.446741+00:00",
       "mcp_domain": [
         "maps",
         "지도",
@@ -737,7 +737,7 @@
       "source": "flor3z-github/navermap-mcp-server",
       "repository": "flor3z-github/navermap-mcp-server",
       "checked_at": "2026-05-07T05:20:56+00:00",
-      "age_days": 7.1,
+      "age_days": 7.45,
       "freshness_sla_days": 7.0
     },
     {
@@ -752,7 +752,7 @@
       "source": "yeonupark/mcp-naver-map",
       "repository": "yeonupark/mcp-naver-map",
       "checked_at": "2026-05-07T05:20:56+00:00",
-      "age_days": 7.1,
+      "age_days": 7.45,
       "freshness_sla_days": 7.0
     }
   ],
