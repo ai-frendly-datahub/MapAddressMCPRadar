@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-14",
+  "category": "map_address_mcp",
+  "article_count": 6,
+  "source_count": 1,
+  "matched_count": 6,
+  "top_entities": [
+    {
+      "name": "ProjectHealth",
+      "count": 20
+    },
+    {
+      "name": "MCPDomain",
+      "count": 14
+    },
+    {
+      "name": "Provider",
+      "count": 10
+    },
+    {
+      "name": "Capability",
+      "count": 8
+    },
+    {
+      "name": "RiskScope",
+      "count": 6
+    }
+  ],
+  "sources": {
+    "awesome-mcp-korea Maps & Address": 6
+  },
+  "generated_at": "2026-06-14T15:48:15.999447+00:00"
+}
